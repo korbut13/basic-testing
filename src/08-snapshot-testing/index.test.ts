@@ -12,14 +12,14 @@ describe('generateLinkedList', () => {
         next: {
           value: null,
           next: null,
-        }
-      }
-    })
+        },
+      },
+    });
   });
 
   // Check match by comparison with snapshot
   test('should generate linked list from values 2', () => {
     const linkedList = generateLinkedList([1, 2]);
-    expect(linkedList).toMatchSnapshot()
+    expect(linkedList).toMatchSnapshot();
   });
 });

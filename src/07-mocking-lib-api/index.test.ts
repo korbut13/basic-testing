@@ -10,12 +10,13 @@ describe('throttledGetDataFromApi', () => {
   beforeEach(() => {
     jest.useFakeTimers();
     jest.spyOn(axios, 'create');
-    jest.spyOn(axios.Axios.prototype, 'get').mockResolvedValue({ data: responseData });
-
+    jest
+      .spyOn(axios.Axios.prototype, 'get')
+      .mockResolvedValue({ data: responseData });
   });
   afterEach(() => {
     jest.clearAllTimers();
-  })
+  });
 
   test('should create instance with provided base url', async () => {
     await throttledGetDataFromApi(relativePath);
@@ -25,7 +26,7 @@ describe('throttledGetDataFromApi', () => {
   test('should perform request to correct provided url', async () => {
     jest.advanceTimersByTime(5000);
     await throttledGetDataFromApi(relativePath);
-    expect(axios.Axios.prototype.get).toHaveBeenCalledWith(relativePath)
+    expect(axios.Axios.prototype.get).toHaveBeenCalledWith(relativePath);
   });
 
   test('should return response data', async () => {

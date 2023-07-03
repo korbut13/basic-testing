@@ -1,17 +1,22 @@
 // Uncomment the code below and write your tests
-import { throwError, throwCustomError, resolveValue, MyAwesomeError, rejectCustomError } from './index';
-
+import {
+  throwError,
+  throwCustomError,
+  resolveValue,
+  MyAwesomeError,
+  rejectCustomError,
+} from './index';
 
 describe('resolveValue', () => {
   test('should resolve provided value', async () => {
     const value = await resolveValue('hello');
-    expect(value).toBe('hello')
+    expect(value).toBe('hello');
   });
 });
 
 describe('throwError', () => {
   test('should throw error with provided message', () => {
-    const message = "The operation failed";
+    const message = 'The operation failed';
     function getErrorMessage() {
       throwError(message);
     }
@@ -39,9 +44,8 @@ describe('throwCustomError', () => {
 
 describe('rejectCustomError', () => {
   test('should reject custom error', async () => {
-
     const err = new MyAwesomeError();
 
-    await rejectCustomError().catch((error) => expect(error).toEqual(err))
+    await rejectCustomError().catch((error) => expect(error).toEqual(err));
   });
 });

@@ -1,5 +1,11 @@
 // Uncomment the code below and write your tests
-import { BankAccount, getBankAccount, InsufficientFundsError, TransferFailedError, SynchronizationFailedError } from './index';
+import {
+  BankAccount,
+  getBankAccount,
+  InsufficientFundsError,
+  TransferFailedError,
+  SynchronizationFailedError,
+} from './index';
 import _ from 'lodash';
 jest.mock('lodash');
 
@@ -23,7 +29,7 @@ describe('BankAccount', () => {
 
     function getError() {
       testBancAccaunt.withdraw(largeAmountToWithdraw);
-    };
+    }
 
     expect(getError).toThrow(withdrawErr);
   });
@@ -34,7 +40,7 @@ describe('BankAccount', () => {
 
     function getError() {
       testBancAccaunt.transfer(largeAmountToWithdraw, otherBancAccount);
-    };
+    }
 
     expect(getError).toThrow(withdrawErr);
   });
@@ -43,23 +49,29 @@ describe('BankAccount', () => {
     const transferErr = new TransferFailedError();
     function getError() {
       testBancAccaunt.transfer(50, testBancAccaunt);
-    };
+    }
 
     expect(getError).toThrow(transferErr);
   });
 
   test('should deposit money', () => {
-    expect(getBankAccount(initBalance).deposit(amountForDeposit).getBalance()).toBe(initBalance + amountForDeposit)
+    expect(
+      getBankAccount(initBalance).deposit(amountForDeposit).getBalance(),
+    ).toBe(initBalance + amountForDeposit);
   });
 
   test('should withdraw money', () => {
-    expect(testBancAccaunt.withdraw(suitableAmountToWithDraw).getBalance()).toBe(initBalance - suitableAmountToWithDraw);
+    expect(
+      testBancAccaunt.withdraw(suitableAmountToWithDraw).getBalance(),
+    ).toBe(initBalance - suitableAmountToWithDraw);
   });
 
   test('should transfer money', () => {
     const otherBancAccount = new BankAccount(initBalance);
     testBancAccaunt.transfer(suitableAmountToWithDraw, otherBancAccount);
-    expect(otherBancAccount.getBalance()).toBe(initBalance + suitableAmountToWithDraw)
+    expect(otherBancAccount.getBalance()).toBe(
+      initBalance + suitableAmountToWithDraw,
+    );
   });
 
   test('fetchBalance should return number in case if request did not failed', async () => {
@@ -88,6 +100,8 @@ describe('BankAccount', () => {
       return initBalance === 1000 ? 1 : 0;
     });
 
-    await testBancAccaunt.synchronizeBalance().catch((err) => expect(err).toEqual(synchronizationErr));
+    await testBancAccaunt
+      .synchronizeBalance()
+      .catch((err) => expect(err).toEqual(synchronizationErr));
   });
 });

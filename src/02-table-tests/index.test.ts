@@ -20,11 +20,13 @@ const testCases = [
   { a: 5, b: 5, action: Action.Exponentiate, expected: 3125 },
   { a: 5, b: 5, action: '5', expected: null },
   { a: 'hello', b: 'world', action: Action.Add, expected: null },
-
 ];
 
 describe('simpleCalculator', () => {
-  test.each(testCases)('simpleCalculator($a, $b, $action)', ({ a, b, action, expected }) => {
-    expect(simpleCalculator({ a, b, action })).toBe(expected);
-  });
+  test.each(testCases)(
+    'simpleCalculator($a, $b, $action)',
+    ({ a, b, action, expected }) => {
+      expect(simpleCalculator({ a, b, action })).toBe(expected);
+    },
+  );
 });
